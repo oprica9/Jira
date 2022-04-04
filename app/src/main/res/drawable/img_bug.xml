@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:shape="rectangle">
+            <corners android:radius="10dp" />
+            <solid android:color="@color/orange"/>
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/ic_baseline_square_24"
+        android:height="90dp"
+        android:width="100dp"/>
+
+    <item
+        android:drawable="@drawable/ic_bug"
+        android:gravity="center"
+        android:height="55dp"
+        android:width="60dp" />
+
+</layer-list>

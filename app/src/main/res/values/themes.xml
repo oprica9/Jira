@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Rsrafprojekat1ognjen_prica_10620" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/gray_33</item>
+        <item name="colorPrimaryVariant">@color/black_03</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/black_03</item>
+        <item name="colorSecondaryVariant">@color/gray_33</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.LoginTheme" parent="Theme.Rsrafprojekat1ognjen_prica_10620">
+        <item name="android:textColor">@color/gray_ce</item>
+        <item name="android:textColorHint">@color/gray_ce</item>
+        <item name="textAllCaps">false</item>
+        <item name="backgroundTint">@color/gray_ce</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Theme.TabStyle" parent="TextAppearance.Design.Tab">
+            <item name="textAllCaps">false</item>
+            <item name="android:textAllCaps">false</item>
+    </style>
+
+</resources>
