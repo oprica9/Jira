@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.NewTicketFragment"
+    tools:context=".view.fragments.EditTicketFragment"
     android:background="@color/black_10">
 
 
     <TextView
-        android:id="@+id/tvAdd"
+        android:id="@+id/tvEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_ticket"
+        android:text="@string/edit_ticket"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginTop="80dp"
@@ -22,29 +22,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etEst"
+        android:id="@+id/etEst2"
         android:layout_width="60dp"
         android:layout_height="50dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
-        android:paddingBottom="20dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
+        android:backgroundTint="@color/gray_9a"
         android:ems="10"
-        android:textSize="16sp"
         android:hint="@string/est"
         android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="20dp"
         android:textColor="@color/gray_9a"
         android:textColorHint="@color/gray_9a"
-        android:backgroundTint="@color/gray_9a"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/spinner3"
-        app:layout_constraintTop_toBottomOf="@+id/tvAdd" />
+        app:layout_constraintStart_toEndOf="@+id/spinner4"
+        app:layout_constraintTop_toBottomOf="@+id/tvEdit" />
 
     <EditText
-        android:id="@+id/etTitle"
+        android:id="@+id/etTitle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -69,14 +68,14 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAdd"
+        app:layout_constraintTop_toBottomOf="@+id/tvEdit"
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/spinner"
         >
 
         <Spinner
-            android:id="@+id/spinType"
+            android:id="@+id/spinType2"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
@@ -86,18 +85,18 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/spinner3"
+        android:id="@+id/spinner4"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/spinner2"
-        app:layout_constraintTop_toBottomOf="@+id/tvAdd"
+        app:layout_constraintTop_toBottomOf="@+id/tvEdit"
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/spinner"
         >
 
         <Spinner
-            android:id="@+id/spinPriority"
+            android:id="@+id/spinPriority2"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
@@ -108,10 +107,10 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAddTicket"
+        android:id="@+id/btnSaveTicket"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_ticket"
+        android:text="@string/save"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
@@ -123,7 +122,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etDesc"
+        android:id="@+id/etDesc2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -142,5 +141,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/etTitle2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

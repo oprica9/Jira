@@ -35,7 +35,6 @@
     </com.google.android.material.tabs.TabLayout>
 
 
-
     <rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.viewpager.NonScrollableViewPager
         android:id="@+id/viewPagerTickets"
         android:layout_width="0dp"

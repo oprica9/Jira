@@ -1,5 +1,7 @@
 package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments;
 
+import static rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments.ToDoFragment.TICKET_DETAIL;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,18 +47,31 @@ public class DoneFragment extends Fragment {
         initView(view);
         initObservers();
         initRecycler();
+        initListeners();
     }
 
     private void initRecycler() {
-        ticketAdapter = new DoneAdapter(new TicketDiffItemCallback());
+        ticketAdapter = new DoneAdapter(
+                new TicketDiffItemCallback(),
+                detailTicket -> {
+                    // todo open ticket details
+                    Bundle args = new Bundle();
+                    args.putInt(TICKET_DETAIL, detailTicket.getId());
+
+                    TicketDetailFragment fragment = new TicketDetailFragment();
+                    fragment.setArguments(args);
+
+                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.add(R.id.fcvMain, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(ticketAdapter);
     }
 
     private void initObservers() {
-        ticketViewModel.getDoneList().observe(getViewLifecycleOwner(), tickets -> {
-            ticketAdapter.submitList(tickets);
-        });
+        ticketViewModel.getDoneList().observe(getViewLifecycleOwner(), tickets -> ticketAdapter.submitList(tickets));
     }
 
     private void initListeners() {

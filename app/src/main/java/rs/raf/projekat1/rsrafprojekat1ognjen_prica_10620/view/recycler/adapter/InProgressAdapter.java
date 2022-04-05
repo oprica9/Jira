@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.function.Consumer;
+
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.R;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.model.Ticket;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.model.enums.Status;
@@ -22,43 +24,69 @@ import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.model.enums.Status;
 
 public class InProgressAdapter extends ListAdapter<Ticket, InProgressAdapter.ViewHolder> {
 
-    private final TicketAction listener;
+    private final Consumer<Ticket> moveL;
+    private final Consumer<Ticket> moveR;
+    private final Consumer<Ticket> detail;
 
-    public InProgressAdapter(@NonNull DiffUtil.ItemCallback<Ticket> diffCallback, TicketAction ticketAction) {
+    public InProgressAdapter(@NonNull DiffUtil.ItemCallback<Ticket> diffCallback, Consumer<Ticket> moveL, Consumer<Ticket> moveR, Consumer<Ticket> detail) {
         super(diffCallback);
-        this.listener = ticketAction;
+        this.moveL = moveL;
+        this.moveR = moveR;
+        this.detail = detail;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_list_item_2, parent, false);
-        return new ViewHolder(view, parent.getContext());
+        return new ViewHolder(
+                view,
+                parent.getContext(),
+                position -> {
+                    Ticket ticket = getItem(position);
+                    moveL.accept(ticket);
+                },
+                position -> {
+                    Ticket ticket = getItem(position);
+                    moveR.accept(ticket);
+                },
+                position -> {
+                    Ticket ticket = getItem(position);
+                    detail.accept(ticket);
+                });
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Ticket ticket = getItem(position);
-        holder.ticket = ticket;
-        holder.bind(ticket, listener);
+        holder.bind(ticket);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         private final Context context;
-        private Ticket ticket;
-        private Button btnSendDone;
-        private Button btnSendToDo;
 
-        public ViewHolder(@NonNull View itemView, Context context) {
+        public ViewHolder(@NonNull View itemView, Context context, Consumer<Integer> moveL, Consumer<Integer> moveR, Consumer<Integer> detail) {
             super(itemView);
             this.context = context;
-            this.btnSendDone = itemView.findViewById(R.id.btnSendDone);
-            this.btnSendToDo = itemView.findViewById(R.id.btnSendToDo);
 
+            itemView.setOnClickListener(v -> {
+                if (getBindingAdapterPosition() != RecyclerView.NO_POSITION)
+                    detail.accept(getBindingAdapterPosition());
+            });
+
+            itemView.findViewById(R.id.btnSendDone).setOnClickListener(v -> {
+                if (getBindingAdapterPosition() != RecyclerView.NO_POSITION)
+                    moveR.accept(getBindingAdapterPosition());
+            });
+
+            itemView.findViewById(R.id.btnSendToDo).setOnClickListener(v -> {
+                if (getBindingAdapterPosition() != RecyclerView.NO_POSITION)
+                    moveL.accept(getBindingAdapterPosition());
+            });
         }
 
-        public void bind(Ticket ticket, TicketAction listener) {
+        public void bind(Ticket ticket) {
             ImageView imageView = itemView.findViewById(R.id.ticketPictureIv);
 
             Glide
@@ -67,18 +95,12 @@ public class InProgressAdapter extends ListAdapter<Ticket, InProgressAdapter.Vie
                     .into(imageView);
             ((TextView) itemView.findViewById(R.id.titleTv)).setText(ticket.getTitle());
             ((TextView) itemView.findViewById(R.id.descTv)).setText(ticket.getDescription());
-            btnSendDone.setOnClickListener(v -> listener.moveTicket(ticket, Status.DONE));
-            btnSendToDo.setOnClickListener(v -> listener.moveTicket(ticket, Status.TO_DO));
         }
 
         public int getImage(String imageName) {
             return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
         }
 
-    }
-
-    public interface TicketAction {
-        int moveTicket(Ticket ticket, Status status);
     }
 
 

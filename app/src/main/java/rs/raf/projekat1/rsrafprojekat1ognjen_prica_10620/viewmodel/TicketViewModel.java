@@ -9,9 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.model.Ticket;
@@ -23,24 +22,38 @@ public class TicketViewModel extends ViewModel {
 
     public static int counter = 0;
 
-    private MutableLiveData<List<Ticket>> toDoList = new MutableLiveData<>();
-    private MutableLiveData<List<Ticket>> inProgressList = new MutableLiveData<>();
-    private MutableLiveData<List<Ticket>> doneList = new MutableLiveData<>();
+    private final MutableLiveData<List<Ticket>> toDoList;
+    private final MutableLiveData<List<Ticket>> inProgressList;
+    private final MutableLiveData<List<Ticket>> doneList;
+
+    // dumpster-fire below
+    private final MutableLiveData<Ticket> detailTicket;
 
     // makeshift database
-    private List<Ticket> todo = new ArrayList<>();
-    private List<Ticket> inProgress = new ArrayList<>();
-    private List<Ticket> done = new ArrayList<>();
+    private final List<Ticket> todo = new ArrayList<>();
+    private final List<Ticket> inProgress = new ArrayList<>();
+    private final List<Ticket> done = new ArrayList<>();
+
+    public TicketViewModel() {
+        this.toDoList = new MutableLiveData<>();
+        this.inProgressList = new MutableLiveData<>();
+        this.doneList = new MutableLiveData<>();
+        this.detailTicket = new MutableLiveData<>();
+    }
 
     public LiveData<List<Ticket>> getToDoList() {
         return toDoList;
     }
+
     public LiveData<List<Ticket>> getInProgressList() {
         return inProgressList;
     }
+
     public LiveData<List<Ticket>> getDoneList() {
         return doneList;
     }
+
+    // todo handle if filter is active
 
     public int addTicket(String type, String priority, String est, String title, String desc) {
 
@@ -74,103 +87,63 @@ public class TicketViewModel extends ViewModel {
 
     public int moveTicket(Ticket ticket, Status status) {
         // moving to in progress
-        List<Ticket> temp;
         if (status.equals(Status.IN_PROGRESS)) {
-            if (toDoList.getValue() == null) {
-                throw new NullPointerException("LISTEN MAN I DONT KNOW WHAT HAPPENED");
-            } else {
-                temp = new ArrayList<>(toDoList.getValue());
-            }
 
-            temp.remove(ticket);
+            todo.remove(ticket);
             ticket.setStatus(status);
-            toDoList.setValue(temp);
+            toDoList.setValue(new ArrayList<>(todo));
 
-            List<Ticket> inProgTemp;
-            if (inProgressList.getValue() == null) {
-                inProgTemp = new ArrayList<>();
-                // throw new NullPointerException("LISTEN MAN I DONT KNOW WHAT HAPPENED");
-            } else {
-                inProgTemp = new ArrayList<>(inProgressList.getValue());
-            }
-            inProgTemp.add(ticket);
-            inProgressList.setValue(inProgTemp);
+            inProgress.add(ticket);
+            inProgressList.setValue(new ArrayList<>(inProgress));
 
             return ticket.getId();
 
         }
         // moving to done
         else if (status.equals(Status.DONE)) {
-            if (inProgressList.getValue() == null) {
-                throw new NullPointerException("LISTEN MAN I DONT KNOW WHAT HAPPENED");
-            } else {
-                temp = new ArrayList<>(inProgressList.getValue());
-            }
 
-            temp.remove(ticket);
+            inProgress.remove(ticket);
             ticket.setStatus(status);
-            inProgressList.setValue(temp);
+            inProgressList.setValue(new ArrayList<>(inProgress));
 
-            List<Ticket> doneTemp;
-            if (doneList.getValue() == null) {
-                doneTemp = new ArrayList<>();
-                // throw new NullPointerException("LISTEN MAN I DONT KNOW WHAT HAPPENED");
-            } else {
-                doneTemp = new ArrayList<>(doneList.getValue());
-            }
-            doneTemp.add(ticket);
-            doneList.setValue(doneTemp);
+            done.add(ticket);
+            doneList.setValue(new ArrayList<>(done));
 
             return ticket.getId();
+
         } else if (status.equals(Status.TO_DO)) {
-            if (inProgressList.getValue() == null) {
-                throw new NullPointerException("LISTEN MAN I DONT KNOW WHAT HAPPENED");
-            } else {
-                temp = new ArrayList<>(inProgressList.getValue());
-            }
 
-            temp.remove(ticket);
+            inProgress.remove(ticket);
             ticket.setStatus(status);
-            inProgressList.setValue(temp);
+            inProgressList.setValue(new ArrayList<>(inProgress));
 
-            List<Ticket> toDoTemp;
-            if (toDoList.getValue() == null) {
-                toDoTemp = new ArrayList<>();
-                // throw new NullPointerException("LISTEN MAN I DONT KNOW WHAT HAPPENED");
-            } else {
-                toDoTemp = new ArrayList<>(toDoList.getValue());
-            }
-            toDoTemp.add(ticket);
-            toDoList.setValue(toDoTemp);
+            todo.add(ticket);
+            toDoList.setValue(new ArrayList<>(todo));
 
             return ticket.getId();
         }
-
 
         return -1;
     }
 
     public int deleteTicket(Ticket t) {
-        List<Ticket> temp = null;
-        if (toDoList.getValue() == null) {
-            throw new NullPointerException("I DUNNO MAN");
-        } else {
-            temp = new ArrayList<>(toDoList.getValue());
-            temp.remove(t);
-            toDoList.setValue(temp);
-            return t.getId();
+        Optional<Ticket> ticketOptional = todo.stream().filter(ticket -> ticket.equals(t)).findFirst();
+        if (ticketOptional.isPresent()) {
+            todo.remove(ticketOptional.get());
+            toDoList.setValue(new ArrayList<>(todo));
         }
+        return t.getId();
     }
 
     public void filterTickets(String filter, Status status) {
 
         List<Ticket> tickets = null;
         if (status.equals(Status.TO_DO))
-            tickets = toDoList.getValue();
+            tickets = todo;
         else if (status.equals(Status.IN_PROGRESS))
-            tickets = inProgressList.getValue();
+            tickets = inProgress;
         else if (status.equals(Status.DONE))
-            tickets = doneList.getValue();
+            tickets = done;
 
         List<Ticket> filteredList;
         if (tickets != null) {
@@ -182,19 +155,15 @@ public class TicketViewModel extends ViewModel {
 
         if (status.equals(Status.TO_DO)) {
             toDoList.setValue(filteredList);
-        }
-        else if (status.equals(Status.IN_PROGRESS)) {
+        } else if (status.equals(Status.IN_PROGRESS)) {
             inProgressList.setValue(filteredList);
-        }
-        else if (status.equals(Status.DONE)) {
+        } else if (status.equals(Status.DONE)) {
             doneList.setValue(filteredList);
         }
 
     }
 
     // misc
-
-
 
     public SpinnerAdapter getTypeAdapter(Context context) {
         List<String> a = new ArrayList<>();
@@ -235,5 +204,126 @@ public class TicketViewModel extends ViewModel {
             }
         }
         return false;
+    }
+
+    public Ticket getTicket(int ticketId) {
+        Optional<Ticket> ticketOptional = todo.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
+
+        if (ticketOptional.isPresent()) {
+            return ticketOptional.get();
+        }
+        ticketOptional = inProgress.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
+        if (ticketOptional.isPresent()) {
+            return ticketOptional.get();
+        }
+        ticketOptional = done.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
+        return ticketOptional.orElse(null);
+    }
+
+    public void incrementLoggedTime(Ticket t) {
+        Optional<Ticket> ticketOptional;
+        switch (t.getStatus()) {
+            case TO_DO: ticketOptional = todo.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
+            case IN_PROGRESS: ticketOptional = inProgress.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
+            case DONE: ticketOptional = done.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
+            default: ticketOptional = Optional.empty();
+        }
+        ticketOptional.ifPresent(ticket -> ticket.setLoggedTime(ticket.getLoggedTime() + 1));
+        ticketOptional.ifPresent(detailTicket::setValue);
+    }
+
+    public boolean decrementLoggedTime(Ticket t) {
+        Optional<Ticket> ticketOptional;
+        switch (t.getStatus()) {
+            case TO_DO: ticketOptional = todo.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
+            case IN_PROGRESS: ticketOptional = inProgress.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
+            case DONE: ticketOptional = done.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
+            default: ticketOptional = Optional.empty();
+        }
+        if (t.getLoggedTime() > 0) {
+            ticketOptional.ifPresent(ticket -> ticket.setLoggedTime(ticket.getLoggedTime() - 1));
+            ticketOptional.ifPresent(detailTicket::setValue);
+        }
+            return true;
+    }
+
+    public LiveData<Ticket> getDetailTicket() {
+        return detailTicket;
+    }
+
+    public void setDetailTicket(int ticketId) {
+        Optional<Ticket> ticketOptional = todo.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
+        ticketOptional.ifPresent(detailTicket::setValue);
+
+        ticketOptional = inProgress.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
+        ticketOptional.ifPresent(detailTicket::setValue);
+
+        ticketOptional = done.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
+        ticketOptional.ifPresent(detailTicket::setValue);
+    }
+
+    public void removeDetailsTicket() {
+        detailTicket.setValue(null);
+    }
+
+    public int editTicket(Ticket ticket, String type, String priority, String est, String title, String desc) {
+        if (!validate(type, priority, est, title, desc)) {
+            System.out.println("DATA INVALID");
+            return -1;
+        }
+
+        TicketType tempType = TicketType.valueOf(type.toUpperCase());
+        Priority tempPriority = Priority.valueOf(priority.toUpperCase());
+
+        ticket.setPriority(tempPriority);
+        ticket.setType(tempType);
+        ticket.setEstimation(Integer.parseInt(est));
+        ticket.setTitle(title);
+        ticket.setDescription(desc);
+
+        if (tempType.equals(TicketType.BUG)) {
+            ticket.setImg("img_bug");
+        } else {
+            ticket.setImg("img_enh");
+        }
+
+        if (ticket.getStatus().equals(Status.TO_DO)) {
+            for (Ticket t: todo) {
+                if (t.getId() == ticket.getId()) {
+                    t.setPriority(ticket.getPriority());
+                    t.setType(ticket.getType());
+                    t.setEstimation(ticket.getEstimation());
+                    t.setTitle(ticket.getTitle());
+                    t.setDescription(ticket.getDescription());
+                    toDoList.setValue(new ArrayList<>(todo));
+                    break;
+                }
+            }
+        } else if (ticket.getStatus().equals(Status.IN_PROGRESS)) {
+            for (Ticket t: inProgress) {
+                if (t.getId() == ticket.getId()) {
+                    t.setPriority(ticket.getPriority());
+                    t.setType(ticket.getType());
+                    t.setEstimation(ticket.getEstimation());
+                    t.setTitle(ticket.getTitle());
+                    t.setDescription(ticket.getDescription());
+                    inProgressList.setValue(new ArrayList<>(inProgress));
+                    break;
+                }
+            }
+        } else if (ticket.getStatus().equals(Status.DONE)) {
+            for (Ticket t: done) {
+                if (t.getId() == ticket.getId()) {
+                    t.setPriority(ticket.getPriority());
+                    t.setType(ticket.getType());
+                    t.setEstimation(ticket.getEstimation());
+                    t.setTitle(ticket.getTitle());
+                    t.setDescription(ticket.getDescription());
+                    doneList.setValue(new ArrayList<>(done));
+                    break;
+                }
+            }
+        }
+        return ticket.getId();
     }
 }

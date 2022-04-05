@@ -34,7 +34,9 @@
     <string name="priority">Priority</string>
     <string name="estimation">Estimation</string>
     <string name="logged_time">Logged time</string>
-    <string name="ticket_desc">Ticket desc</string>
+    <string name="ticket_desc">Ticket desc.</string>
     <string name="edit">Edit</string>
+    <string name="edit_ticket">Edit ticket</string>
+    <string name="save">Save</string>
 
 </resources>
