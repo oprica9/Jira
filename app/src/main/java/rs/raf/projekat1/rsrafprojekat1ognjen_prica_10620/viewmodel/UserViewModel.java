@@ -66,6 +66,11 @@ public class UserViewModel extends ViewModel {
 
             } else {
 
+                // ovde ono predefinisano
+                if (password.equals("123")) {
+
+                }
+
                 return false;
             }
 
@@ -168,5 +173,11 @@ public class UserViewModel extends ViewModel {
         // todo only for testing
         return true;
         // return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public boolean isAdmin() {
+        if (userData.getValue() != null)
+            return userData.getValue().getType().equals(Type.ADMIN);
+        throw new NullPointerException("NESTO ADMIN");
     }
 }

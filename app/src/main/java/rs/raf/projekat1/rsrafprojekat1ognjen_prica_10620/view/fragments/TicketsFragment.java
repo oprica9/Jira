@@ -1,21 +1,26 @@
 package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.R;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.viewpager.TicketPagerAdapter;
+import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.viewmodel.TicketViewModel;
 
 
 public class TicketsFragment extends Fragment {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
-
 
     public TicketsFragment() {
         super(R.layout.fragment_tickets);

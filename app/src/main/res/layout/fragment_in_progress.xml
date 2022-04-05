@@ -6,7 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.InProgressFragment">
 
+    <EditText
+        android:id="@+id/etSearch2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/gray_9a"
+        android:ems="10"
+        android:hint="@string/search"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="20dp"
+        android:textColor="@color/gray_9a"
+        android:textColorHint="@color/gray_9a"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:id="@+id/recyclerView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -14,6 +36,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/etSearch2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

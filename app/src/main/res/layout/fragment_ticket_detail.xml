@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragments.TicketDetailFragment"
+    android:background="@color/black_10">
+
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/ticketTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticketTypePic" />
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/ticketType1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/ticket_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticketTitle" />
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/priority1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/priority"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticketType1" />
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/estimation1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/estimation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priority1" />
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/loggedTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/logged_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estimation1" />
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/ticketDesc1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ticket_desc"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loggedTime" />
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/ticketType2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ticketType1"
+        app:layout_constraintTop_toBottomOf="@+id/ticketTitle" />
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/priority2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/priority1"
+        app:layout_constraintTop_toBottomOf="@+id/ticketType2" />
+
+    <TextView
+        android:textColor="@color/gray_ce"
+        android:id="@+id/estimation2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/estimation1"
+        app:layout_constraintTop_toBottomOf="@+id/priority2" />
+
+    <TextView
+        android:id="@+id/ticketDesc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/gray_ce"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticketDesc1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLoggedTime"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/btn_border"
+        android:backgroundTint="@color/orange"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/loggedTime"
+        app:layout_constraintTop_toBottomOf="@+id/estimation2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_border"
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/orange"
+        android:textAllCaps="false"
+        android:text="@string/edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ticketTypePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/img_bug"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+</androidx.constraintlayout.widget.ConstraintLayout>

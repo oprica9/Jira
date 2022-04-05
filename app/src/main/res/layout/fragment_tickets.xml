@@ -34,26 +34,7 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/gray_9a"
-        android:ems="10"
-        android:hint="@string/search"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:paddingBottom="20dp"
-        android:textColor="@color/gray_9a"
-        android:textColorHint="@color/gray_9a"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
 
     <rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.viewpager.NonScrollableViewPager
         android:id="@+id/viewPagerTickets"
@@ -62,6 +43,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

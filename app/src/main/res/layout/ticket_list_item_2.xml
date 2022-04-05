@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/titleTv"
@@ -41,33 +42,37 @@
         android:textSize="14sp"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+        app:layout_constraintEnd_toStartOf="@+id/btnSendToDo"
         app:layout_constraintHorizontal_bias="0.004"
         app:layout_constraintStart_toEndOf="@id/ticketPictureIv"
         app:layout_constraintTop_toBottomOf="@id/titleTv"
         app:layout_constraintVertical_bias="0.05" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSendInProgress"
+        android:id="@+id/btnSendDone"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/btn_ticket_1"
+        android:contentDescription="@string/moveDone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnSendToDo"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/btn_ticket_2"
+        android:background="@drawable/btn_ticket_arrow_left"
+        android:contentDescription="@string/move_to_todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSendInProgress" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSendDone"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,10 @@
 package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,8 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.R;
-import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.recycler.adapter.TicketAdapter;
+
+import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.model.enums.Status;
+import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.recycler.adapter.InProgressAdapter;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.recycler.differ.TicketDiffItemCallback;
+
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.viewmodel.TicketViewModel;
 
 public class InProgressFragment extends Fragment {
@@ -20,7 +26,8 @@ public class InProgressFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private TicketViewModel ticketViewModel;
-    private TicketAdapter ticketAdapter;
+    private InProgressAdapter ticketAdapter;
+    private EditText etSearch;
 
     public InProgressFragment() {
         super(R.layout.fragment_in_progress);
@@ -37,10 +44,28 @@ public class InProgressFragment extends Fragment {
         initView(view);
         initObservers();
         initRecycler();
+        initListeners();
+    }
+
+    private void initListeners() {
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ticketViewModel.filterTickets(editable.toString(), Status.IN_PROGRESS);
+            }
+        });
     }
 
     private void initRecycler() {
-        ticketAdapter = new TicketAdapter(new TicketDiffItemCallback());
+        ticketAdapter = new InProgressAdapter(new TicketDiffItemCallback(), (ticket, status) -> ticketViewModel.moveTicket(ticket, status));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(ticketAdapter);
     }
@@ -52,6 +77,7 @@ public class InProgressFragment extends Fragment {
     }
 
     private void initView(View view) {
+        etSearch = view.findViewById(R.id.etSearch2);
         recyclerView = view.findViewById(R.id.recyclerView2);
     }
 }

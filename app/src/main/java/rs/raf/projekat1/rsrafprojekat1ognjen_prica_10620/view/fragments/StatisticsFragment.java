@@ -45,12 +45,14 @@ public class StatisticsFragment extends Fragment {
     private void init(View view) {
         ticketViewModel = new ViewModelProvider(requireActivity()).get(TicketViewModel.class);
         initView(view);
-        //loadData();
+        loadData();
         initObservers();
     }
 
     private void initObservers() {
-        //ticketViewModel.getTicketsData().observe(getViewLifecycleOwner(), t -> loadData());
+        ticketViewModel.getToDoList().observe(getViewLifecycleOwner(), t -> loadData());
+        ticketViewModel.getInProgressList().observe(getViewLifecycleOwner(), t -> loadData());
+        ticketViewModel.getDoneList().observe(getViewLifecycleOwner(), t -> loadData());
     }
 
     private void initView(View view) {
@@ -66,39 +68,48 @@ public class StatisticsFragment extends Fragment {
     }
 
     private void loadData() {
-/*
-        List<Ticket> tickets = ticketViewModel.getTicketsData().getValue();
+
+        List<Ticket> ticketsToDo = ticketViewModel.getToDoList().getValue();
+        List<Ticket> ticketsInProgress = ticketViewModel.getInProgressList().getValue();
+        List<Ticket> ticketsDone = ticketViewModel.getDoneList().getValue();
 
         int toDoEnh = 0, inProgEnh = 0, doneEnh = 0;
         int toDoBug = 0, inProgBug = 0, doneBug = 0;
 
-        if (tickets != null && !tickets.isEmpty()) {
-            for (Ticket t: tickets) {
-                if (t.getStatus().equals(Status.TO_DO)) {
-                    if (t.getType().equals(TicketType.ENHANCEMENT)) {
-                        toDoEnh++;
-                    }else if (t.getType().equals(TicketType.BUG)){
-                        toDoBug++;
-                    }
-                }
 
-                if (t.getStatus().equals(Status.IN_PROGRESS)) {
-                    if (t.getType().equals(TicketType.ENHANCEMENT)) {
-                        inProgEnh++;
-                    }else if (t.getType().equals(TicketType.BUG)){
-                        inProgBug++;
-                    }
-                }
-
-                if (t.getStatus().equals(Status.DONE)) {
-                    if (t.getType().equals(TicketType.ENHANCEMENT)) {
-                        doneEnh++;
-                    }else if (t.getType().equals(TicketType.BUG)){
-                        doneBug++;
-                    }
+        if (ticketsToDo != null)
+        for (Ticket t : ticketsToDo) {
+            if (t.getStatus().equals(Status.TO_DO)) {
+                if (t.getType().equals(TicketType.ENHANCEMENT)) {
+                    toDoEnh++;
+                } else if (t.getType().equals(TicketType.BUG)) {
+                    toDoBug++;
                 }
             }
         }
+
+        if (ticketsInProgress != null)
+        for (Ticket t : ticketsInProgress) {
+            if (t.getStatus().equals(Status.IN_PROGRESS)) {
+                if (t.getType().equals(TicketType.ENHANCEMENT)) {
+                    inProgEnh++;
+                } else if (t.getType().equals(TicketType.BUG)) {
+                    inProgBug++;
+                }
+            }
+        }
+
+        if (ticketsDone != null)
+        for (Ticket t : ticketsDone) {
+            if (t.getStatus().equals(Status.DONE)) {
+                if (t.getType().equals(TicketType.ENHANCEMENT)) {
+                    doneEnh++;
+                } else if (t.getType().equals(TicketType.BUG)) {
+                    doneBug++;
+                }
+            }
+        }
+
 
         toDoSumTv.setText(String.valueOf(toDoEnh + toDoBug));
         toDoEnhTv.setText(String.valueOf(toDoEnh));
@@ -110,7 +121,7 @@ public class StatisticsFragment extends Fragment {
 
         doneSumTv.setText(String.valueOf(doneEnh + doneBug));
         doneEnhTv.setText(String.valueOf(doneEnh));
-        doneBugTv.setText(String.valueOf(doneBug));*/
+        doneBugTv.setText(String.valueOf(doneBug));
     }
 
 }

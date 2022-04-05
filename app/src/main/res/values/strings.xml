@@ -27,5 +27,14 @@
     <string name="raf_jira_statistics">Raf Jira statistics</string>
     <string name="enhancements">Enhancements</string>
     <string name="bugs">Bugs</string>
+    <string name="type">Type</string>
+    <string name="moveDone">Move to Done</string>
+    <string name="move_to_todo">Move to ToDo</string>
+    <string name="ticket_type">Ticket type</string>
+    <string name="priority">Priority</string>
+    <string name="estimation">Estimation</string>
+    <string name="logged_time">Logged time</string>
+    <string name="ticket_desc">Ticket desc</string>
+    <string name="edit">Edit</string>
 
 </resources>
