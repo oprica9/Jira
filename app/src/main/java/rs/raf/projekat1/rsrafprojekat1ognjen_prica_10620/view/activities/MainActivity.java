@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void initFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fcvMain, fragment);
+        transaction.replace(R.id.fcvMain, fragment);
         transaction.commit();
     }
 

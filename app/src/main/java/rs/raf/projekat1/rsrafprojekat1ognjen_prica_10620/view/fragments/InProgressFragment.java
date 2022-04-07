@@ -81,7 +81,7 @@ public class InProgressFragment extends Fragment {
                     fragment.setArguments(args);
 
                     FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.add(R.id.fcvMain, fragment);
+                    transaction.replace(R.id.fcvMain, fragment);
                     transaction.addToBackStack(null);
                     transaction.commit();
                 });

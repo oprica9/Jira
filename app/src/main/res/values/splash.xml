@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black_10</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo_splash</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo_splash2</item>
         <item name="postSplashScreenTheme">@style/Theme.Rsrafprojekat1ognjen_prica_10620</item>
         <item name="windowNoTitle">true</item>
     </style>
