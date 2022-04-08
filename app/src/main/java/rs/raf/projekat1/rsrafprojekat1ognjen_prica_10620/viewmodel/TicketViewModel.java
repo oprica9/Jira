@@ -8,7 +8,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.security.Key;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,11 +22,21 @@ import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.model.enums.TicketType;
 
 public class TicketViewModel extends ViewModel {
 
+    public enum Tip {
+        TO_DO,
+        IN_PROGRESS,
+        DONE
+    }
+
     public static int counter = 0;
 
     private final MutableLiveData<List<Ticket>> toDoList;
     private final MutableLiveData<List<Ticket>> inProgressList;
     private final MutableLiveData<List<Ticket>> doneList;
+    private final MutableLiveData<List<Ticket>> statisticsToDoList;
+    private final MutableLiveData<List<Ticket>> statisticsInProgressList;
+    private final MutableLiveData<List<Ticket>> statisticsDoneList;
+
 
     // dumpster-fire below
     private final MutableLiveData<Ticket> detailTicket;
@@ -39,6 +51,9 @@ public class TicketViewModel extends ViewModel {
         this.inProgressList = new MutableLiveData<>();
         this.doneList = new MutableLiveData<>();
         this.detailTicket = new MutableLiveData<>();
+        this.statisticsToDoList = new MutableLiveData<>();
+        this.statisticsInProgressList = new MutableLiveData<>();
+        this.statisticsDoneList = new MutableLiveData<>();
     }
 
     public LiveData<List<Ticket>> getToDoList() {
@@ -53,7 +68,17 @@ public class TicketViewModel extends ViewModel {
         return doneList;
     }
 
-    // todo handle if filter is active
+    public LiveData<List<Ticket>> getStatisticsToDoList() {
+        return statisticsToDoList;
+    }
+
+    public LiveData<List<Ticket>> getStatisticsInProgressList() {
+        return statisticsInProgressList;
+    }
+
+    public LiveData<List<Ticket>> getStatisticsDoneList() {
+        return statisticsDoneList;
+    }
 
     public int addTicket(String type, String priority, String est, String title, String desc) {
 
@@ -81,6 +106,7 @@ public class TicketViewModel extends ViewModel {
 
         todo.add(t);
         toDoList.setValue(new ArrayList<>(todo));
+        statisticsToDoList.setValue(new ArrayList<>(todo));
 
         return t.getId();
     }
@@ -92,9 +118,11 @@ public class TicketViewModel extends ViewModel {
             todo.remove(ticket);
             ticket.setStatus(status);
             toDoList.setValue(new ArrayList<>(todo));
+            statisticsToDoList.setValue(new ArrayList<>(todo));
 
             inProgress.add(ticket);
             inProgressList.setValue(new ArrayList<>(inProgress));
+            statisticsInProgressList.setValue(new ArrayList<>(inProgress));
 
             return ticket.getId();
 
@@ -105,9 +133,11 @@ public class TicketViewModel extends ViewModel {
             inProgress.remove(ticket);
             ticket.setStatus(status);
             inProgressList.setValue(new ArrayList<>(inProgress));
+            statisticsInProgressList.setValue(new ArrayList<>(inProgress));
 
             done.add(ticket);
             doneList.setValue(new ArrayList<>(done));
+            statisticsDoneList.setValue(new ArrayList<>(done));
 
             return ticket.getId();
 
@@ -116,9 +146,11 @@ public class TicketViewModel extends ViewModel {
             inProgress.remove(ticket);
             ticket.setStatus(status);
             inProgressList.setValue(new ArrayList<>(inProgress));
+            statisticsInProgressList.setValue(new ArrayList<>(inProgress));
 
             todo.add(ticket);
             toDoList.setValue(new ArrayList<>(todo));
+            statisticsToDoList.setValue(new ArrayList<>(todo));
 
             return ticket.getId();
         }
@@ -131,6 +163,7 @@ public class TicketViewModel extends ViewModel {
         if (ticketOptional.isPresent()) {
             todo.remove(ticketOptional.get());
             toDoList.setValue(new ArrayList<>(todo));
+            statisticsToDoList.setValue(new ArrayList<>(todo));
         }
         return t.getId();
     }
@@ -199,7 +232,6 @@ public class TicketViewModel extends ViewModel {
                 Integer.parseInt(est);
                 return true;
             } catch (NumberFormatException e) {
-                System.out.println("NUMBER EXCEPTION");
                 return false;
             }
         }
@@ -223,10 +255,17 @@ public class TicketViewModel extends ViewModel {
     public void incrementLoggedTime(Ticket t) {
         Optional<Ticket> ticketOptional;
         switch (t.getStatus()) {
-            case TO_DO: ticketOptional = todo.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
-            case IN_PROGRESS: ticketOptional = inProgress.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
-            case DONE: ticketOptional = done.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
-            default: ticketOptional = Optional.empty();
+            case TO_DO:
+                ticketOptional = todo.stream().filter(ticket -> ticket.equals(t)).findFirst();
+                break;
+            case IN_PROGRESS:
+                ticketOptional = inProgress.stream().filter(ticket -> ticket.equals(t)).findFirst();
+                break;
+            case DONE:
+                ticketOptional = done.stream().filter(ticket -> ticket.equals(t)).findFirst();
+                break;
+            default:
+                ticketOptional = Optional.empty();
         }
         ticketOptional.ifPresent(ticket -> ticket.setLoggedTime(ticket.getLoggedTime() + 1));
         ticketOptional.ifPresent(detailTicket::setValue);
@@ -235,16 +274,23 @@ public class TicketViewModel extends ViewModel {
     public boolean decrementLoggedTime(Ticket t) {
         Optional<Ticket> ticketOptional;
         switch (t.getStatus()) {
-            case TO_DO: ticketOptional = todo.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
-            case IN_PROGRESS: ticketOptional = inProgress.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
-            case DONE: ticketOptional = done.stream().filter(ticket -> ticket.equals(t)).findFirst(); break;
-            default: ticketOptional = Optional.empty();
+            case TO_DO:
+                ticketOptional = todo.stream().filter(ticket -> ticket.equals(t)).findFirst();
+                break;
+            case IN_PROGRESS:
+                ticketOptional = inProgress.stream().filter(ticket -> ticket.equals(t)).findFirst();
+                break;
+            case DONE:
+                ticketOptional = done.stream().filter(ticket -> ticket.equals(t)).findFirst();
+                break;
+            default:
+                ticketOptional = Optional.empty();
         }
         if (t.getLoggedTime() > 0) {
             ticketOptional.ifPresent(ticket -> ticket.setLoggedTime(ticket.getLoggedTime() - 1));
             ticketOptional.ifPresent(detailTicket::setValue);
         }
-            return true;
+        return true;
     }
 
     public LiveData<Ticket> getDetailTicket() {
@@ -253,13 +299,21 @@ public class TicketViewModel extends ViewModel {
 
     public void setDetailTicket(int ticketId) {
         Optional<Ticket> ticketOptional = todo.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
-        ticketOptional.ifPresent(detailTicket::setValue);
+        if (ticketOptional.isPresent()) {
+            detailTicket.setValue(ticketOptional.get());
+            return;
+        }
 
         ticketOptional = inProgress.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
-        ticketOptional.ifPresent(detailTicket::setValue);
+        if (ticketOptional.isPresent()) {
+            detailTicket.setValue(ticketOptional.get());
+            return;
+        }
 
         ticketOptional = done.stream().filter(ticket -> ticket.getId() == ticketId).findFirst();
-        ticketOptional.ifPresent(detailTicket::setValue);
+        if (ticketOptional.isPresent()) {
+            detailTicket.setValue(ticketOptional.get());
+        }
     }
 
     public void removeDetailsTicket() {
@@ -288,7 +342,7 @@ public class TicketViewModel extends ViewModel {
         }
 
         if (ticket.getStatus().equals(Status.TO_DO)) {
-            for (Ticket t: todo) {
+            for (Ticket t : todo) {
                 if (t.getId() == ticket.getId()) {
                     t.setPriority(ticket.getPriority());
                     t.setType(ticket.getType());
@@ -296,11 +350,12 @@ public class TicketViewModel extends ViewModel {
                     t.setTitle(ticket.getTitle());
                     t.setDescription(ticket.getDescription());
                     toDoList.setValue(new ArrayList<>(todo));
+                    statisticsToDoList.setValue(new ArrayList<>(todo));
                     break;
                 }
             }
         } else if (ticket.getStatus().equals(Status.IN_PROGRESS)) {
-            for (Ticket t: inProgress) {
+            for (Ticket t : inProgress) {
                 if (t.getId() == ticket.getId()) {
                     t.setPriority(ticket.getPriority());
                     t.setType(ticket.getType());
@@ -308,11 +363,12 @@ public class TicketViewModel extends ViewModel {
                     t.setTitle(ticket.getTitle());
                     t.setDescription(ticket.getDescription());
                     inProgressList.setValue(new ArrayList<>(inProgress));
+                    statisticsInProgressList.setValue(new ArrayList<>(inProgress));
                     break;
                 }
             }
         } else if (ticket.getStatus().equals(Status.DONE)) {
-            for (Ticket t: done) {
+            for (Ticket t : done) {
                 if (t.getId() == ticket.getId()) {
                     t.setPriority(ticket.getPriority());
                     t.setType(ticket.getType());
@@ -320,6 +376,7 @@ public class TicketViewModel extends ViewModel {
                     t.setTitle(ticket.getTitle());
                     t.setDescription(ticket.getDescription());
                     doneList.setValue(new ArrayList<>(done));
+                    statisticsDoneList.setValue(new ArrayList<>(done));
                     break;
                 }
             }

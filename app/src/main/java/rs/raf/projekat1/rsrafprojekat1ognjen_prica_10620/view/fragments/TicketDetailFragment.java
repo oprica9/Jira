@@ -19,12 +19,15 @@ import com.bumptech.glide.Glide;
 
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.R;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.model.Ticket;
+import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.model.enums.Status;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.viewmodel.TicketViewModel;
+import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.viewmodel.UserViewModel;
 import timber.log.Timber;
 
 public class TicketDetailFragment extends Fragment {
 
     public static final String EDIT_TICKET = "editTicket";
+    public static final String EDIT_TICKET_FRAGMENT_TAG = "edit_ticket_fragment_tag";
 
     private ImageView imageView;
     private TextView tvTitle;
@@ -36,6 +39,7 @@ public class TicketDetailFragment extends Fragment {
     private Button btnEdit;
 
     private TicketViewModel ticketViewModel;
+    private UserViewModel userViewModel;
     private Ticket ticket;
 
     public TicketDetailFragment() {
@@ -45,7 +49,6 @@ public class TicketDetailFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("LOOOOGGGG");
         loadData();
     }
 
@@ -53,6 +56,7 @@ public class TicketDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ticketViewModel = new ViewModelProvider(requireActivity()).get(TicketViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         if(getArguments() != null) {
             ticketViewModel.setDetailTicket(getArguments().getInt(TICKET_DETAIL, -1));
             ticket = ticketViewModel.getTicket(getArguments().getInt(TICKET_DETAIL, -1));
@@ -86,6 +90,17 @@ public class TicketDetailFragment extends Fragment {
         btnLoggedTime = view.findViewById(R.id.btnLoggedTime);
         tvDesc = view.findViewById(R.id.ticketDesc2);
         btnEdit = view.findViewById(R.id.btnEdit);
+
+        if(!userViewModel.isAdmin()) {
+            btnEdit.setVisibility(View.INVISIBLE);
+            btnEdit.setEnabled(false);
+        } else {
+            if (ticket.getStatus().equals(Status.DONE)) {
+                btnEdit.setVisibility(View.INVISIBLE);
+                btnEdit.setEnabled(false);
+            }
+        }
+
     }
 
     private void loadData() {
@@ -121,7 +136,7 @@ public class TicketDetailFragment extends Fragment {
             fragment.setArguments(args);
 
             FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fcvMain, fragment);
+            transaction.replace(R.id.fcvMain, fragment, EDIT_TICKET_FRAGMENT_TAG);
             transaction.addToBackStack(null);
             transaction.commit();
         });

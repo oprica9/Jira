@@ -66,7 +66,8 @@ public class UserViewModel extends ViewModel {
 
             } else {
 
-                // ovde ono predefinisano
+                // ovde nek bude ono predefinisano
+                // sto sam prevideo kako treba da se uradi -_-
                 if (password.equals("123")) {
 
                 }

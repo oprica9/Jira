@@ -3,9 +3,11 @@ package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.activities;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,6 +19,9 @@ import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.viewmodel.UserViewModel
 public class MainActivity extends AppCompatActivity {
 
     public static final String USER = "userLoggedIn";
+    public static final String MAIN_FRAGMENT_TAG = "main_fragment_tag";
+    public static final String LOGIN_FRAGMENT_TAG = "login_fragment_tag";
+
     private UserViewModel viewModel;
 
     @Override
@@ -25,9 +30,28 @@ public class MainActivity extends AppCompatActivity {
         // todo splashScreen
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         splashScreen.setKeepOnScreenCondition(this::init);
-        setContentView(R.layout.activity_main);
-        init();
+
+        if (savedInstanceState == null) {
+            setContentView(R.layout.activity_main);
+            init();
+        } else {
+            restoreFragments();
+        }
     }
+
+    private void restoreFragments() {
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment f = manager.findFragmentById(R.id.fcvMain);
+        if (f != null && f.getTag() != null)
+            manager.putFragment(outState, f.getTag(), f);
+    }
+
+    
 
     public void setActionBarTitle(String title) {
         setTitle(title);    // as you used custom view
@@ -41,16 +65,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        if (viewModel.isLoggedIn()) {
-            initFragment(new MainFragment());
-        } else {
-            initFragment(new LoginFragment());
-        }
-    }
-
-    public void initFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fcvMain, fragment);
+        if (viewModel.isLoggedIn()) {
+            transaction.replace(R.id.fcvMain, new MainFragment(), MAIN_FRAGMENT_TAG);
+        } else {
+            transaction.replace(R.id.fcvMain, new LoginFragment(), LOGIN_FRAGMENT_TAG);
+        }
         transaction.commit();
     }
 

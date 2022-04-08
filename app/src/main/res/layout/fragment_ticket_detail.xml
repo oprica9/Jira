@@ -4,94 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.TicketDetailFragment"
-    android:background="@color/black_10">
+    android:background="@color/black_10"
+    tools:context=".view.fragments.TicketDetailFragment">
 
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/ticketTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/opensans_medium"
+        android:textColor="@color/gray_ce"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ticketTypePic" />
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/ticketType1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/ticket_type"
+        android:textColor="@color/gray_ce"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="@string/ticket_type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ticketTitle" />
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/priority1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/priority"
+        android:textColor="@color/gray_ce"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="@string/priority"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ticketType1" />
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/estimation1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/estimation"
+        android:textColor="@color/gray_ce"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="@string/estimation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priority1" />
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/loggedTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/logged_time"
+        android:textColor="@color/gray_ce"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="@string/logged_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/estimation1" />
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/ticketDesc1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ticket_desc"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/ticket_desc"
+        android:textColor="@color/gray_ce"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loggedTime" />
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/ticketType2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="20dp"
+        android:fontFamily="@font/opensans_medium"
+        android:textColor="@color/gray_ce"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -99,12 +106,13 @@
         app:layout_constraintTop_toBottomOf="@+id/ticketTitle" />
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/priority2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="20dp"
+        android:fontFamily="@font/opensans_medium"
+        android:textColor="@color/gray_ce"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -112,43 +120,56 @@
         app:layout_constraintTop_toBottomOf="@+id/ticketType2" />
 
     <TextView
-        android:textColor="@color/gray_ce"
         android:id="@+id/estimation2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="20dp"
+        android:fontFamily="@font/opensans_medium"
+        android:textColor="@color/gray_ce"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/estimation1"
         app:layout_constraintTop_toBottomOf="@+id/priority2" />
 
-    <TextView
-        android:id="@+id/ticketDesc2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ScrollView
+        android:id="@+id/scrollViewDetail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/gray_ce"
-        app:layout_constraintBottom_toTopOf="@+id/btnEdit"
+        android:layout_marginBottom="25dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/btnEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ticketDesc1"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/ticketDesc2"
+            style="@style/Theme.ContentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_medium" />
+
+    </ScrollView>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLoggedTime"
         android:layout_width="45dp"
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
-        android:textColor="@color/white"
         android:layout_marginEnd="20dp"
         android:background="@drawable/btn_border"
         android:backgroundTint="@color/orange"
+        android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -156,15 +177,14 @@
         app:layout_constraintTop_toBottomOf="@+id/estimation2" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:background="@drawable/btn_border"
         android:id="@+id/btnEdit"
+        style="@style/Theme.Buttons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/orange"
-        android:textAllCaps="false"
+        android:fontFamily="@font/opensans_medium"
         android:text="@string/edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

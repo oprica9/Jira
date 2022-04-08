@@ -50,10 +50,11 @@ public class StatisticsFragment extends Fragment {
     }
 
     private void initObservers() {
-        ticketViewModel.getToDoList().observe(getViewLifecycleOwner(), t -> loadData());
-        ticketViewModel.getInProgressList().observe(getViewLifecycleOwner(), t -> loadData());
-        ticketViewModel.getDoneList().observe(getViewLifecycleOwner(), t -> loadData());
+        ticketViewModel.getStatisticsToDoList().observe(getViewLifecycleOwner(), t -> loadData());
+        ticketViewModel.getStatisticsInProgressList().observe(getViewLifecycleOwner(), t -> loadData());
+        ticketViewModel.getStatisticsDoneList().observe(getViewLifecycleOwner(), t -> loadData());
     }
+
 
     private void initView(View view) {
         toDoSumTv = view.findViewById(R.id.toDoSumTv);
@@ -69,9 +70,9 @@ public class StatisticsFragment extends Fragment {
 
     private void loadData() {
 
-        List<Ticket> ticketsToDo = ticketViewModel.getToDoList().getValue();
-        List<Ticket> ticketsInProgress = ticketViewModel.getInProgressList().getValue();
-        List<Ticket> ticketsDone = ticketViewModel.getDoneList().getValue();
+        List<Ticket> ticketsToDo = ticketViewModel.getStatisticsToDoList().getValue();
+        List<Ticket> ticketsInProgress = ticketViewModel.getStatisticsInProgressList().getValue();
+        List<Ticket> ticketsDone = ticketViewModel.getStatisticsDoneList().getValue();
 
         int toDoEnh = 0, inProgEnh = 0, doneEnh = 0;
         int toDoBug = 0, inProgBug = 0, doneBug = 0;

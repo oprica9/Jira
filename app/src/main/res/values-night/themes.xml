@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Rsrafprojekat1ognjen_prica_10620" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Rsrafprojekat1ognjen_prica_10620" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/gray_33</item>
         <item name="colorPrimaryVariant">@color/black_03</item>
@@ -13,4 +13,44 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.ContentText" parent="Theme.Rsrafprojekat1ognjen_prica_10620">
+        <item name="android:textColor">@color/gray_ce</item>
+        <item name="android:textColorHint">@color/gray_9a</item>
+        <item name="android:textSize">14sp</item>
+        <item name="backgroundTint">@color/gray_9a</item>
+    </style>
+
+    <style name="Theme.BoldText" parent="Theme.ContentText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.Titles28" parent="Theme.BoldText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/gray_ce</item>
+    </style>
+
+    <style name="Theme.Buttons" parent="Theme.Rsrafprojekat1ognjen_prica_10620">
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:background">@drawable/btn_border</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Theme.LoginTheme" parent="Theme.Rsrafprojekat1ognjen_prica_10620">
+        <item name="android:textColor">@color/gray_ce</item>
+        <item name="android:textColorHint">@color/gray_9a</item>
+        <item name="textAllCaps">false</item>
+        <item name="backgroundTint">@color/gray_9a</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Theme.TabStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

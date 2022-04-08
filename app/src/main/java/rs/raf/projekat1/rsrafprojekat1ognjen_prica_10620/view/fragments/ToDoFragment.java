@@ -1,6 +1,8 @@
 package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments;
 
 
+import static rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments.DoneFragment.TICKET_DETAIL_FRAGMENT_TAG;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -69,7 +71,7 @@ public class ToDoFragment extends Fragment {
                     fragment.setArguments(args);
 
                     FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fcvMain, fragment);
+                    transaction.replace(R.id.fcvMain, fragment, TICKET_DETAIL_FRAGMENT_TAG);
                     transaction.addToBackStack(null);
                     transaction.commit();
                 });

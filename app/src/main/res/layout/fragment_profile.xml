@@ -5,20 +5,19 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.LoginFragment"
-    android:background="@color/black_10">
+    android:background="@color/black_10"
+    tools:context=".view.fragments.LoginFragment">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogout"
+        style="@style/Theme.Buttons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/btn_border"
+        android:fontFamily="@font/opensans_medium"
         android:text="@string/log_out"
-        android:textAllCaps="false"
-        android:textColor="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,32 +30,29 @@
         android:layout_marginTop="100dp"
         android:src="@drawable/ic_profile_pic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/gray_ce"
         android:id="@+id/tvUsername"
+        style="@style/Theme.BoldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Username"
+        android:fontFamily="@font/opensans_medium"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/gray_ce"
         android:id="@+id/tvEmail"
+        style="@style/Theme.BoldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="email@raf.rs"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/opensans_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername" />

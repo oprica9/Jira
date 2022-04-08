@@ -11,16 +11,16 @@
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:background="@drawable/bottom_nav"
+        android:paddingTop="2dp"
+        android:paddingBottom="5dp"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation"
-        android:paddingTop="2dp"
-        android:paddingBottom="5dp"
-        app:labelVisibilityMode="labeled"
-        app:itemTextColor="@color/bottom_nav_color"
-        app:itemIconTint="@color/bottom_nav_color"
-        app:itemIconSize="30dp"/>
+        app:menu="@menu/bottom_navigation" />
 
     <rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.viewpager.NonScrollableViewPager
         android:id="@+id/viewPagerMain"

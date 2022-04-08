@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rsrafprojekat1ognjen_prica_10620">
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">

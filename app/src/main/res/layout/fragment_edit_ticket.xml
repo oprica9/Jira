@@ -4,75 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.EditTicketFragment"
-    android:background="@color/black_10">
+    android:background="@color/black_10"
+    tools:context=".view.fragments.EditTicketFragment">
 
 
     <TextView
         android:id="@+id/tvEdit"
+        style="@style/Theme.Titles28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit_ticket"
-        android:textSize="28sp"
-        android:textStyle="bold"
         android:layout_marginTop="80dp"
-        android:textColor="@color/gray_ce"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/edit_ticket"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etEst2"
+        style="@style/Theme.ContentText"
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/gray_9a"
         android:ems="10"
+        android:fontFamily="@font/opensans_medium"
         android:hint="@string/est"
         android:inputType="textPersonName"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:paddingBottom="20dp"
-        android:textColor="@color/gray_9a"
-        android:textColorHint="@color/gray_9a"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/spinner4"
-        app:layout_constraintTop_toBottomOf="@+id/tvEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEdit"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/etTitle2"
+        style="@style/Theme.ContentText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:paddingBottom="20dp"
+        android:ems="10"
+        android:fontFamily="@font/opensans_medium"
+        android:hint="@string/ticket_title"
+        android:inputType="textPersonName"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/ticket_title"
-        android:textColor="@color/gray_9a"
-        android:textColorHint="@color/gray_9a"
-        android:backgroundTint="@color/gray_9a"
+        android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        android:importantForAutofill="no" />
 
     <RelativeLayout
         android:id="@+id/spinner2"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEdit"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/spinner"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEdit">
 
         <Spinner
             android:id="@+id/spinType2"
@@ -86,14 +83,13 @@
 
     <RelativeLayout
         android:id="@+id/spinner4"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/spinner2"
-        app:layout_constraintTop_toBottomOf="@+id/tvEdit"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/spinner"
-        >
+        app:layout_constraintStart_toEndOf="@+id/spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/tvEdit">
 
         <Spinner
             android:id="@+id/spinPriority2"
@@ -108,38 +104,45 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSaveTicket"
+        style="@style/Theme.Buttons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/save"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_border"
-        android:textColor="@color/orange"
-        android:textAllCaps="false"
+        android:fontFamily="@font/opensans_medium"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/etDesc2"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/ticket_description"
-        android:layout_marginTop="40dp"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
-        android:paddingBottom="20dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:textColor="@color/gray_9a"
-        android:textColorHint="@color/gray_9a"
-        android:backgroundTint="@color/gray_9a"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSaveTicket"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTitle2" />
+        app:layout_constraintTop_toBottomOf="@+id/etTitle2">
+
+        <EditText
+            android:id="@+id/etDesc2"
+            style="@style/Theme.ContentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/opensans_medium"
+            android:hint="@string/ticket_description"
+            android:inputType="textMultiLine"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="20dp"
+            android:importantForAutofill="no" />
+
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

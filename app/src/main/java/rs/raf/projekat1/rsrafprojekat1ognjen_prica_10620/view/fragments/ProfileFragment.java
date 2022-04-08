@@ -1,5 +1,7 @@
 package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments;
 
+import static rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.activities.MainActivity.LOGIN_FRAGMENT_TAG;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -62,7 +64,7 @@ public class ProfileFragment extends Fragment {
     private void initListeners() {
         btnLogout.setOnClickListener(v -> {
             viewModel.logout();
-            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fcvMain, new LoginFragment()).commit();
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fcvMain, new LoginFragment(), LOGIN_FRAGMENT_TAG).commit();
         });
     }
 }

@@ -1,5 +1,6 @@
 package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments;
 
+import static rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments.DoneFragment.TICKET_DETAIL_FRAGMENT_TAG;
 import static rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments.ToDoFragment.TICKET_DETAIL;
 
 import android.os.Bundle;
@@ -81,7 +82,7 @@ public class InProgressFragment extends Fragment {
                     fragment.setArguments(args);
 
                     FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fcvMain, fragment);
+                    transaction.replace(R.id.fcvMain, fragment, TICKET_DETAIL_FRAGMENT_TAG);
                     transaction.addToBackStack(null);
                     transaction.commit();
                 });

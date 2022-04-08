@@ -1,5 +1,7 @@
 package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments;
 
+import static rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.activities.MainActivity.MAIN_FRAGMENT_TAG;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,10 +39,9 @@ public class LoginFragment extends Fragment {
 
 
     // private
-
     private void init(View view) {
-            initView(view);
-            initListeners();
+        initView(view);
+        initListeners();
     }
 
     private void initView(View view) {
@@ -49,8 +50,8 @@ public class LoginFragment extends Fragment {
 
         // s ovim vezujemo viewmodel za activity
         viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-        if(getActivity() != null)
-            ((MainActivity)getActivity()).setActionBarTitle("Login");
+        if (getActivity() != null)
+            ((MainActivity) getActivity()).setActionBarTitle("Login");
 
         btnLogin = view.findViewById(R.id.btnLogin);
         etUsername = view.findViewById(R.id.etUsername);
@@ -67,12 +68,10 @@ public class LoginFragment extends Fragment {
             String password = etPassword.getText().toString().trim();
 
             if (viewModel.login(username, email, password)) {
-                Toast.makeText(getActivity(), "Logged in!...i think", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Logged in!", Toast.LENGTH_SHORT).show();
 
-                // todo after logging in, show main fragment, and remove login from stack
-                // here, the parent is main activity
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.fcvMain, new MainFragment());
+                transaction.replace(R.id.fcvMain, new MainFragment(), MAIN_FRAGMENT_TAG);
                 // ovo ispod daje mogucnost korisniku da se vrati nazad
                 // transaction.addToBackStack(null);
                 transaction.commit();

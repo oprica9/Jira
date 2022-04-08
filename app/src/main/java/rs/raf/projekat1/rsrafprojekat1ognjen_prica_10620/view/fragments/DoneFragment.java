@@ -25,6 +25,8 @@ import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.viewmodel.TicketViewMod
 
 public class DoneFragment extends Fragment {
 
+    public static final String TICKET_DETAIL_FRAGMENT_TAG = "ticket_detail_fragment_tag";
+
     private RecyclerView recyclerView;
 
     private TicketViewModel ticketViewModel;
@@ -62,7 +64,7 @@ public class DoneFragment extends Fragment {
                     fragment.setArguments(args);
 
                     FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fcvMain, fragment);
+                    transaction.replace(R.id.fcvMain, fragment, TICKET_DETAIL_FRAGMENT_TAG);
                     transaction.addToBackStack(null);
                     transaction.commit();
                 });
