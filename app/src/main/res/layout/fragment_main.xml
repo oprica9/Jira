@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.LoginFragment">
+    tools:context=".view.fragments.MainFragment">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        style="@style/BottomNav"
         android:id="@+id/bottomNavBar"
         android:layout_width="0dp"
         android:layout_height="75dp"
-        android:background="@drawable/bottom_nav"
         android:paddingTop="2dp"
         android:paddingBottom="5dp"
         app:itemIconSize="30dp"

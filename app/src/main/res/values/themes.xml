@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/black_10</item>
     </style>
 
     <style name="Theme.ContentText" parent="Theme.Rsrafprojekat1ognjen_prica_10620">
@@ -46,6 +47,7 @@
     </style>
 
     <style name="Theme.TabStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:background">@color/black_10</item>
         <item name="android:fontFamily">@font/opensans_regular</item>
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
@@ -53,4 +55,14 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="SpinnerStyleContainer">
+        <item name="android:background">@drawable/spinner</item>
+    </style>
+    <style name="SpinnerStyle">
+        <item name="android:popupBackground">@color/gray_ce</item>
+    </style>
+
+    <style name="BottomNav">
+        <item name="android:background">@drawable/bottom_nav</item>
+    </style>
 </resources>

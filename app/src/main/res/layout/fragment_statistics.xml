@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_10"
-    android:label="@string/login"
-    tools:context=".view.fragments.LoginFragment">
+    android:label="@string/statistics"
+    tools:context=".view.fragments.StatisticsFragment">
 
     <TextView
         android:id="@+id/doneSumTv"

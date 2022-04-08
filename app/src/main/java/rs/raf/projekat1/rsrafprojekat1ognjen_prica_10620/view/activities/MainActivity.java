@@ -11,10 +11,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.Objects;
+
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.R;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments.LoginFragment;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments.MainFragment;
 import rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.viewmodel.UserViewModel;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,28 +33,11 @@ public class MainActivity extends AppCompatActivity {
         // todo splashScreen
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         splashScreen.setKeepOnScreenCondition(this::init);
-
+        setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            setContentView(R.layout.activity_main);
             init();
-        } else {
-            restoreFragments();
         }
     }
-
-    private void restoreFragments() {
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        FragmentManager manager = getSupportFragmentManager();
-        Fragment f = manager.findFragmentById(R.id.fcvMain);
-        if (f != null && f.getTag() != null)
-            manager.putFragment(outState, f.getTag(), f);
-    }
-
-    
 
     public void setActionBarTitle(String title) {
         setTitle(title);    // as you used custom view
@@ -78,4 +64,5 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
         viewModel.loadData(this);
     }
+
 }

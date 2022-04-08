@@ -40,7 +40,7 @@ public class TicketsFragment extends Fragment {
     }
 
     private void initTabs() {
-        viewPager.setAdapter(new TicketPagerAdapter(getChildFragmentManager()));
+        viewPager.setAdapter(new TicketPagerAdapter(getChildFragmentManager(), requireActivity()));
         tabLayout.setupWithViewPager(viewPager);
     }
 

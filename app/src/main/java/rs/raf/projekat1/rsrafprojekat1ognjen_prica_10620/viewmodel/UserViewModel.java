@@ -4,6 +4,7 @@ import static rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.activities.
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Patterns;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -44,14 +45,37 @@ public class UserViewModel extends ViewModel {
         }
 
         // validate data
-        if (!isPasswordValid(password) || !isEmailValid(email)) {
-            throw new RuntimeException("Invalid email or password. Password must be greater than 5 characters.");
+        if (!isPasswordValid(password)) {
+            throw new RuntimeException("Password must have more than 4 characters.", new Throwable("password_format"));
+        }
+        if (!isEmailValid(email)) {
+            throw new RuntimeException("Invalid email format", new Throwable("email_format"));
         }
 
         // check if already logged in
         User user = userData.getValue();
         if (user != null) {
+            if (!password.equals("12345") && !password.equals("54321")) {
+                throw new RuntimeException("12345 admin, 54321 user", new Throwable("password_error"));
+            }
+            Type type = initType(username);
+            if (type.equals(Type.ADMIN)) {
+                if (!password.equals("12345")) {
+                    throw new RuntimeException("12345 pass for admin");
+                }
+            } else {
+                if (!password.equals("54321")) {
+                    throw new RuntimeException("54321 pass for user");
+                }
+            }
+                user.setRememberMe(true);
+                sharedPreferences
+                        .edit()
+                        .putString(USER, generateStringFromUser(user))
+                        .apply();
+                return true;
 
+/*
             // authenticate
             if (password.equals(user.getPassword())
                     && username.equals(user.getUsername())
@@ -74,9 +98,48 @@ public class UserViewModel extends ViewModel {
 
                 return false;
             }
-
+*/
         } else {
-            // todo i mean hardcoded 0 yikes
+            if (!password.equals("12345") && !password.equals("54321")) {
+                throw new RuntimeException("12345 admin, 54321 user", new Throwable("password_error"));
+            }
+
+            Type type = initType(username);
+            String dumbKey;
+            if (type.equals(Type.ADMIN)) {
+                if (!password.equals("12345")) {
+                    throw new RuntimeException("12345 pass for admin");
+                }
+                dumbKey = "12345";
+            } else {
+                if (!password.equals("54321")) {
+                    throw new RuntimeException("54321 pass for user");
+                }
+                dumbKey = "54321";
+            }
+
+            String userStr =
+                    0 + ","
+                            + username + ","
+                            + email + ","
+                            + dumbKey + ","
+                            + type.name().toLowerCase() + ","
+                            + true;
+            // ovo true je za kao remember me, u slucaju da se izloguje pa da opet udje u app, da ga
+            // ne bi automatski ulogovao preko shared prefs
+
+            sharedPreferences
+                    .edit()
+                    .putString(USER, userStr)
+                    .apply();
+
+            User userToSave = new User(0, username, email, password, type);
+            userToSave.setRememberMe(true);
+
+            userData.setValue(userToSave);
+            return true;
+
+            /*
             // first time login, gotta save that data
             Type type = initType(username);
             String userStr =
@@ -99,6 +162,7 @@ public class UserViewModel extends ViewModel {
 
             userData.setValue(userToSave);
             return true;
+            */
         }
     }
 
@@ -166,14 +230,14 @@ public class UserViewModel extends ViewModel {
 
     private boolean isPasswordValid(String password) {
         // todo only for testing
-        return true;
-        // return password.length() >= 5;
+        // return true;
+        return password.length() >= 5;
     }
 
     private boolean isEmailValid(String email) {
         // todo only for testing
-        return true;
-        // return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        // return true;
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     public boolean isAdmin() {

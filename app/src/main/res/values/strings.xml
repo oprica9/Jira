@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">rs.raf.projekat1.ognjen_prica_10620</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="username">Username</string>
@@ -23,7 +22,7 @@
     <string name="done">Done</string>
     <string name="in_progress">In progress</string>
     <string name="todo">ToDo</string>
-    <string name="search">Search...</string>
+    <string name="search">Search…</string>
     <string name="raf_jira_statistics">Raf Jira statistics</string>
     <string name="enhancements">Enhancements</string>
     <string name="bugs">Bugs</string>
@@ -38,5 +37,12 @@
     <string name="edit">Edit</string>
     <string name="edit_ticket">Edit ticket</string>
     <string name="save">Save</string>
+    <string name="highest">Highest</string>
+    <string name="high">high</string>
+    <string name="medium">Medium</string>
+    <string name="low">Low</string>
+    <string name="lowest">Lowest</string>
+    <string name="bug">Bug</string>
+    <string name="enhancement">Enhancement</string>
 
 </resources>

@@ -8,10 +8,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,7 +36,6 @@ public class ToDoFragment extends Fragment {
     private UserViewModel userViewModel;
     private TicketViewModel ticketViewModel;
     private ToDoAdapter toDoAdapter;
-
     private EditText etSearch;
 
     public ToDoFragment() {
@@ -63,7 +64,6 @@ public class ToDoFragment extends Fragment {
                 moveTicket -> ticketViewModel.moveTicket(moveTicket, Status.IN_PROGRESS),
                 delTicket -> ticketViewModel.deleteTicket(delTicket),
                 detailTicket -> {
-                    // todo open ticket details
                     Bundle args = new Bundle();
                     args.putInt(TICKET_DETAIL, detailTicket.getId());
 
@@ -86,10 +86,12 @@ public class ToDoFragment extends Fragment {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
                 ticketViewModel.filterTickets(editable.toString(), Status.TO_DO);

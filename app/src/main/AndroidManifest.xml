@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Rsrafprojekat1ognjen_prica_10620">
+        android:theme="@style/Theme.Rsrafprojekat1ognjen_prica_10620"
+        android:configChanges="orientation|screenSize">
         <activity
             android:windowSoftInputMode="adjustPan"
             android:name=".view.activities.MainActivity"

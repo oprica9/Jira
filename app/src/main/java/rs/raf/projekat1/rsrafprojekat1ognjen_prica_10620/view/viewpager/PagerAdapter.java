@@ -42,14 +42,4 @@ public class PagerAdapter extends FragmentPagerAdapter {
         return ITEM_COUNT;
     }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        switch(position){
-            case FRAGMENT_1: return "1";
-            case FRAGMENT_2: return "2";
-            case FRAGMENT_3: return "3";
-            default: return "4";
-        }
-    }
 }

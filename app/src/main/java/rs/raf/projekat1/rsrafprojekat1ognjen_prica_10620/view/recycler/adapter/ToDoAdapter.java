@@ -78,12 +78,11 @@ public class ToDoAdapter extends ListAdapter<Ticket, ToDoAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView, Context context, boolean admin, Consumer<Integer> moveItem, Consumer<Integer> deleteItem, Consumer<Integer> detail) {
             super(itemView);
             this.context = context;
+            itemView.setOnClickListener(v -> {
+                if (getBindingAdapterPosition() != RecyclerView.NO_POSITION)
+                    detail.accept(getBindingAdapterPosition());
+            });
             if (admin) {
-
-                itemView.setOnClickListener(v -> {
-                    if (getBindingAdapterPosition() != RecyclerView.NO_POSITION)
-                        detail.accept(getBindingAdapterPosition());
-                });
 
                 itemView.findViewById(R.id.btnSendInProgress).setOnClickListener(v -> {
                     if (getBindingAdapterPosition() != RecyclerView.NO_POSITION)

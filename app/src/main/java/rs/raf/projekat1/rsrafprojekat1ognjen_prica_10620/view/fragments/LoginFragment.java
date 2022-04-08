@@ -2,6 +2,7 @@ package rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.fragments;
 
 import static rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.activities.MainActivity.MAIN_FRAGMENT_TAG;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +38,6 @@ public class LoginFragment extends Fragment {
         init(view);
     }
 
-
     // private
     private void init(View view) {
         initView(view);
@@ -67,19 +67,19 @@ public class LoginFragment extends Fragment {
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
 
-            if (viewModel.login(username, email, password)) {
-                Toast.makeText(getActivity(), "Logged in!", Toast.LENGTH_SHORT).show();
+            try {
+                if (viewModel.login(username, email, password)) {
+                    Toast.makeText(getActivity(), "Logged in!", Toast.LENGTH_SHORT).show();
 
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.fcvMain, new MainFragment(), MAIN_FRAGMENT_TAG);
-                // ovo ispod daje mogucnost korisniku da se vrati nazad
-                // transaction.addToBackStack(null);
-                transaction.commit();
-
-            } else {
-                Toast.makeText(getActivity(), "Failed to log in...sorry!", Toast.LENGTH_SHORT).show();
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fcvMain, new MainFragment(), MAIN_FRAGMENT_TAG);
+                    // ovo ispod daje mogucnost korisniku da se vrati nazad
+                    // transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            } catch (RuntimeException e) {
+                Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-
         });
     }
 }

@@ -204,7 +204,6 @@ public class TicketViewModel extends ViewModel {
             a.add(t.name().charAt(0) + t.name().substring(1).toLowerCase());
         }
 
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, a);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return adapter;
