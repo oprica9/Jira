@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
-        style="@style/Theme.TabStyle"
         android:id="@+id/tabLayout"
+        style="@style/Theme.TabStyle"
         android:layout_width="0dp"
         android:layout_height="80dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
     </com.google.android.material.tabs.TabLayout>
 
 
-    <rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620.view.viewpager.NonScrollableViewPager
+    <rs.raf.projekat1.ognjen_prica_10620.view.viewpager.NonScrollableViewPager
         android:id="@+id/viewPagerTickets"
         android:layout_width="0dp"
         android:layout_height="0dp"

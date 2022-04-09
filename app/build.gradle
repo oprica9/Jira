@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "rs.raf.projekat1.rsrafprojekat1ognjen_prica_10620"
+        applicationId "rs.raf.projekat1.ognjen_prica_10620"
         minSdk 26
         targetSdk 32
         versionCode 1
